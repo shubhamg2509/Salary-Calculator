@@ -5,349 +5,470 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Salary Calculator — India, FY 2026-27</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andada+Pro:wght@400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#101B42;
-    --ink-soft:#48587A;
-    --paper:#F5F7FA;
-    --paper-raised:#FFFFFF;
-    --gold:#3B6FEA;
-    --gold-deep:#2450B8;
-    --teal:#10897C;
-    --teal-bg:#E3F5F1;
-    --rust:#C0392B;
-    --rust-bg:#FBE9E7;
-    --line:#DFE3EA;
-    --shadow: 0 1px 2px rgba(16,27,66,0.06), 0 4px 16px rgba(16,27,66,0.06);
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:'Inter',sans-serif; line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:1180px; margin:0 auto; padding:36px 24px 80px;}
-  header.masthead{
-    background:var(--ink); color:#fff;
-    padding:22px 28px; margin:-36px -24px 28px; border-radius:0 0 10px 10px;
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-    border-bottom:4px solid var(--gold);
-  }
-  header.masthead .title{font-family:'Inter',sans-serif;}
-  header.masthead h1{
-    font-size:clamp(22px,3vw,30px); font-weight:800; margin:0; color:#fff;
-    letter-spacing:-0.01em;
-  }
-  header.masthead .sub{color:#B9C4E0; font-size:13px; margin-top:3px;}
-  .notice{
-    background:var(--rust-bg); border:1px solid #e0bdb2; color:var(--rust);
-    padding:12px 16px; border-radius:4px; font-size:13px; margin-bottom:26px;
-  }
-  .notice b{color:var(--rust);}
-  .grid{display:grid; grid-template-columns: 380px 1fr; gap:28px;}
-  @media (max-width:920px){ .grid{grid-template-columns:1fr;} }
-  .panel{
-    background:var(--paper-raised); border:1px solid var(--line); border-radius:6px;
-    padding:22px; box-shadow:var(--shadow);
-  }
-  .panel h2{
-    font-family:'Inter',sans-serif; font-size:16px; margin:0 0 4px; color:var(--ink);
-  }
-  .panel .hint{font-size:12px; color:var(--ink-soft); margin-bottom:16px;}
-  .field{margin-bottom:16px;}
-  .field label{display:block; font-size:12.5px; font-weight:600; margin-bottom:5px; color:var(--ink);}
-  .field .desc{font-size:11px; color:var(--ink-soft); margin-top:3px;}
-  input[type=number], input[type=text], select{
-    width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:4px;
-    font-family:'IBM Plex Mono',monospace; font-size:14px; background:#fcfbf8; color:var(--ink);
-  }
-  input[type=number]:focus, select:focus, input[type=text]:focus{ outline:2px solid var(--gold); outline-offset:1px; }
-  .row2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
-  .radio-group{display:flex; gap:8px; flex-wrap:wrap;}
-  .radio-pill{
-    border:1px solid var(--line); border-radius:20px; padding:7px 13px; font-size:12.5px;
-    cursor:pointer; background:#fcfbf8; user-select:none;
-  }
-  .radio-pill input{display:none;}
-  .radio-pill.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
-  fieldset{border:1px solid var(--line); border-radius:6px; padding:14px; margin:0 0 16px;}
-  legend{font-size:12.5px; font-weight:600; padding:0 6px;}
-  .check-row{display:flex; align-items:flex-start; gap:8px; padding:6px 0; border-bottom:1px dashed var(--line); font-size:12.5px;}
-  .check-row:last-child{border-bottom:none;}
-  .check-row input{margin-top:3px;}
-  .check-row .amt{font-family:'IBM Plex Mono',monospace; color:var(--gold-deep); font-weight:600; white-space:nowrap;}
-  .tag{display:inline-block; font-size:9.5px; padding:1px 6px; border-radius:10px; margin-left:5px; font-weight:600; letter-spacing:.02em;}
-  .tag.both{background:var(--teal-bg); color:var(--teal);}
-  .tag.old{background:#eee2c9; color:var(--gold-deep);}
-  details.advanced{margin-top:6px;}
-  details.advanced summary{cursor:pointer; font-size:12.5px; font-weight:600; color:var(--ink-soft); padding:8px 0;}
-  .calc-btn{
-    width:100%; padding:13px; margin-top:6px; background:var(--ink); color:#fff; border:none;
-    border-radius:5px; font-weight:600; font-size:14px; cursor:pointer; font-family:'Inter',sans-serif;
-    letter-spacing:.01em;
-  }
-  .calc-btn:hover{background:#12203a;}
+:root{
+  --mg-red:#E60027; --mg-ink:#0A0A10; --mg-white:#FFFFFF;
+  --mg-coral:#FC7152; --mg-sun:#FDDC72; --mg-sand:#F3E8D4; --mg-mint:#B7E1D6;
+  --mg-blush:#F7C1D6; --mg-periwinkle:#B1B8FF; --mg-lilac:#C7B8FF;
+  --mg-red-700:#B3001E; --mg-red-600:#CC0022; --mg-red-100:#FFE1E6;
+  --mg-ink-800:#1C1C24; --mg-ink-700:#2E2E38; --mg-ink-500:#5C5C68; --mg-ink-400:#82828E;
+  --mg-ink-300:#B4B4BD; --mg-ink-200:#DEDEE3; --mg-ink-100:#EFEFF2; --mg-ink-50:#F7F7F9;
 
-  /* RESULTS */
-  .compare{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:20px;}
-  @media (max-width:700px){ .compare{grid-template-columns:1fr;} }
-  .regime-card{
-    background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:20px;
-    position:relative; box-shadow:var(--shadow);
-  }
-  .regime-card.winner{ border:2px solid var(--teal); }
-  .regime-card .badge{
-    position:absolute; top:-11px; right:16px; background:var(--teal); color:#fff; font-size:10.5px;
-    padding:3px 10px; border-radius:12px; font-weight:700; letter-spacing:.03em;
-  }
-  .regime-card h3{ font-family:'Inter',sans-serif; font-size:15px; margin:0 0 14px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em; }
-  .big-figure{font-family:'IBM Plex Mono',monospace; font-size:30px; font-weight:600; color:var(--ink); margin-bottom:2px;}
-  .big-figure .per{font-size:13px; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:400;}
-  .sub-figure{font-size:12.5px; color:var(--ink-soft); margin-bottom:14px;}
-  .mini-line{display:flex; justify-content:space-between; font-size:12.5px; padding:5px 0; border-bottom:1px dashed var(--line);}
-  .mini-line:last-child{border-bottom:none;}
-  .mini-line .v{font-family:'IBM Plex Mono',monospace;}
-  .mini-line.neg .v{color:var(--rust);}
-  .mini-line.pos .v{color:var(--teal);}
+  --text-primary:var(--mg-ink); --text-secondary:var(--mg-ink-500); --text-muted:var(--mg-ink-400);
+  --border-hairline:var(--mg-ink-200);
 
-  .ledger{
-    background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; padding:24px; box-shadow:var(--shadow);
-  }
-  .ledger h2{font-family:'Inter',sans-serif; font-size:18px; margin:0 0 4px;}
-  .ledger .hint{font-size:12px; color:var(--ink-soft); margin-bottom:16px;}
-  table.ledger-table{width:100%; border-collapse:collapse; font-size:13px;}
-  table.ledger-table th{
-    text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft);
-    border-bottom:2px solid var(--ink); padding:8px 6px;
-  }
-  table.ledger-table td{ padding:8px 6px; border-bottom:1px solid var(--line); }
-  table.ledger-table td.num, table.ledger-table th.num{ text-align:right; font-family:'IBM Plex Mono',monospace; }
-  table.ledger-table tr.section td{ font-weight:700; background:#f0ede3; }
-  table.ledger-table tr.total td{ font-weight:700; border-top:2px solid var(--ink); border-bottom:none; }
-  .waterfall{ margin-top:22px; }
-  .wf-row{display:flex; align-items:center; gap:10px; font-size:12px; margin-bottom:6px;}
-  .wf-label{width:190px; flex-shrink:0; color:var(--ink-soft);}
-  .wf-bar{height:16px; border-radius:3px;}
-  .wf-val{font-family:'IBM Plex Mono',monospace; width:110px; text-align:right; flex-shrink:0;}
+  --font-display:'Andada Pro',Georgia,'Times New Roman',serif;
+  --font-sans:'Hanken Grotesk','Helvetica Neue',Arial,sans-serif;
 
-  .footnotes{
-    margin-top:30px; padding-top:16px; border-top:1px solid var(--line); font-size:11.5px; color:var(--ink-soft);
-  }
-  .footnotes h4{ font-size:12px; color:var(--ink); margin:0 0 8px; }
-  .footnotes ul{ margin:0; padding-left:18px; }
-  .footnotes li{ margin-bottom:5px; }
-  .warn-inline{ color:var(--rust); font-weight:600; }
+  --fs-3xs:11px; --fs-2xs:12px; --fs-xs:13px; --fs-sm:15px; --fs-md:17px; --fs-lg:20px;
+  --fs-xl:24px; --fs-2xl:30px; --fs-4xl:48px;
+  --ls-label:0.12em; --ls-caps:0.16em; --ls-display:-0.02em;
+
+  --gradient-3:radial-gradient(110% 120% at 70% 50%,var(--mg-white) 0%,var(--mg-blush) 45%,var(--mg-coral) 90%);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--mg-white);color:var(--text-primary);
+  font:400 var(--fs-md)/1.5 var(--font-sans)}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;letter-spacing:-0.01em;margin:0}
+h1{font-size:clamp(34px,5.2vw,64px);line-height:1.06;letter-spacing:var(--ls-display)}
+h2{font-size:var(--fs-xl);line-height:1.15}
+h3{font-size:var(--fs-lg);line-height:1.15}
+p{margin:0;text-wrap:pretty}
+a{color:var(--mg-red);text-decoration:none}
+a:hover{color:var(--mg-red-700);text-decoration:underline;text-underline-offset:3px}
+::selection{background:var(--mg-red);color:var(--mg-white)}
+:focus-visible{outline:2px solid var(--mg-red);outline-offset:2px}
+
+.eyebrow{font:500 var(--fs-2xs)/1.2 var(--font-sans);letter-spacing:var(--ls-caps);text-transform:uppercase}
+.label{font:500 var(--fs-2xs)/1.2 var(--font-sans);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--text-secondary)}
+.caption{font:400 var(--fs-xs)/1.35 var(--font-sans);color:var(--text-muted)}
+.num{font-variant-numeric:tabular-nums}
+.red{color:var(--mg-red)}
+
+.masthead{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  padding:18px 32px;border-bottom:1px solid var(--border-hairline)}
+.masthead .meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.rule{width:1px;height:14px;background:var(--border-hairline)}
+
+.hero{background:var(--gradient-3);padding:62px 32px 54px}
+.hero .inner{max-width:1440px;margin:0 auto}
+.hero h1{max-width:20ch;margin-top:18px}
+.hero p{font:400 var(--fs-lg)/1.35 var(--font-sans);max-width:62ch;margin-top:22px;color:var(--mg-ink-800)}
+
+.cols{max-width:1440px;margin:0 auto;padding:40px 32px 0;display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start}
+.col-in{flex:1 1 400px;min-width:300px;max-width:540px;display:grid;gap:34px}
+.col-out{flex:2 1 560px;min-width:300px}
+
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding-bottom:14px;border-bottom:1px solid var(--mg-ink)}
+.sec-h .left{display:flex;align-items:baseline;gap:12px}
+.sec-num{font:500 var(--fs-2xs)/1.2 var(--font-sans);letter-spacing:var(--ls-label);color:var(--text-muted)}
+.sec-tag{font:500 var(--fs-2xs)/1.2 var(--font-sans);letter-spacing:var(--ls-caps);text-transform:uppercase;
+  color:var(--text-muted);white-space:nowrap}
+.sec-tag.req{color:var(--mg-red);border:1px solid var(--mg-red);padding:5px 9px}
+.sec-tag.oldonly{color:var(--mg-red)}
+.sec p.intro{font:400 var(--fs-xs)/1.35 var(--font-sans);color:var(--text-secondary);margin-top:14px}
+
+.key{background:var(--mg-sand);border:1px solid var(--mg-ink);padding:24px}
+.key .sec-h{border-bottom:none;padding-bottom:0}
+.key .echo{display:flex;flex-wrap:wrap;gap:26px;margin-top:18px;padding-top:16px;border-top:1px solid var(--mg-ink-300)}
+.key .echo b{display:block;font-family:var(--font-display);font-size:var(--fs-lg);font-weight:400;margin-top:5px}
+.key .caption{color:var(--mg-ink-700)}
+
+.field{display:grid;gap:7px}
+.row{display:flex;flex-wrap:wrap;gap:14px}
+.row>.field{flex:1 1 150px;min-width:0}
+
+input[type=number],input[type=text],select{width:100%;font:400 var(--fs-sm)/1.5 var(--font-sans);
+  color:var(--text-primary);padding:12px 14px;background:var(--mg-white);
+  border:1px solid var(--border-hairline);border-radius:0;outline:none;
+  transition:border-color 160ms cubic-bezier(.2,0,0,1)}
+input[type=number]:focus,input[type=text]:focus,select:focus{border-color:var(--mg-ink)}
+select{appearance:none;padding-right:38px;cursor:pointer;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none' stroke='%230A0A10' stroke-width='1.5'%3E%3Cpath d='M4 7l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center}
+
+.opt{display:flex;align-items:flex-start;gap:10px;font:400 var(--fs-sm)/1.5 var(--font-sans);cursor:pointer}
+.opt input{appearance:none;margin:2px 0 0;width:18px;height:18px;flex:none;
+  border:1px solid var(--border-hairline);background:var(--mg-white);border-radius:0;cursor:pointer;
+  transition:border-color 160ms cubic-bezier(.2,0,0,1),background 160ms cubic-bezier(.2,0,0,1);position:relative}
+.opt input[type=radio]{border-radius:999px}
+.opt input:checked{border-color:var(--mg-ink);background:var(--mg-ink)}
+.opt input[type=radio]:checked{background:var(--mg-white)}
+.opt input[type=radio]:checked::after{content:"";position:absolute;inset:3.5px;border-radius:999px;background:var(--mg-ink)}
+.opt input[type=checkbox]:checked::after{content:"";position:absolute;left:4px;top:1px;width:8px;height:12px;
+  border:solid var(--mg-white);border-width:0 1.5px 1.5px 0;transform:rotate(40deg)}
+
+.brow{display:grid;grid-template-columns:minmax(0,1fr) 116px;gap:14px;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--border-hairline)}
+.brow .name{font:500 var(--fs-sm)/1.5 var(--font-sans)}
+.crow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.crow .cn{flex:2 1 150px;min-width:0}
+.crow .cr{flex:1 1 130px;min-width:0}
+.crow .ca{flex:1 1 110px;min-width:0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;
+  font:500 var(--fs-xs)/1.5 var(--font-sans);padding:8px 18px;border-radius:999px;
+  background:transparent;color:var(--text-primary);border:1px solid var(--mg-ink);cursor:pointer;
+  transition:background 160ms cubic-bezier(.2,0,0,1)}
+.btn:hover{background:var(--mg-ink-100)}
+.btn:active{opacity:.9}
+.btn.ghost{border-color:transparent}
+.btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+.result{position:sticky;top:0;z-index:2;background:var(--mg-red);color:var(--mg-white);padding:30px 32px 26px}
+.result .top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.result .big{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:10px}
+.result .big span:first-child{font-family:var(--font-display);font-size:clamp(40px,6vw,68px);
+  line-height:1.02;letter-spacing:var(--ls-display)}
+.result .big span:last-child{font:400 var(--fs-lg)/1.35 var(--font-sans)}
+.result .note{margin-top:8px}
+.result .stats{display:flex;flex-wrap:wrap;gap:28px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.45)}
+.result .stats b{display:block;font-family:var(--font-display);font-size:var(--fs-xl);font-weight:400;margin-top:6px}
+
+.warn{background:var(--mg-red-100);border:1px solid var(--mg-red);padding:16px 18px;margin-top:20px;
+  font:400 var(--fs-sm)/1.5 var(--font-sans);color:var(--mg-red-700)}
+
+.block{margin-top:40px}
+.block h2+p{font:400 var(--fs-xs)/1.35 var(--font-sans);color:var(--text-secondary);margin-top:10px;max-width:62ch}
+
+.regimes{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px}
+.rcard{flex:1 1 230px;min-width:0;border:1px solid var(--border-hairline)}
+.rcard .win{height:4px;background:var(--mg-red)}
+.rcard .body{padding:22px}
+.rcard .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.rcard .mo{font-family:var(--font-display);font-size:var(--fs-2xl);line-height:1.02;margin-top:14px}
+.rcard .yr{font:400 var(--fs-xs)/1.35 var(--font-sans);color:var(--text-secondary);margin-top:6px}
+.rcard .lines{margin-top:18px}
+.rcard .ln{display:flex;justify-content:space-between;gap:12px;padding:8px 0;
+  border-top:1px solid var(--border-hairline);font:400 var(--fs-sm)/1.5 var(--font-sans)}
+.rcard .ln span:first-child{color:var(--text-secondary)}
+.rcard .ln.tot{padding:10px 0;border-top:1px solid var(--mg-ink);font-weight:600}
+.rcard .ln.tot span:first-child{color:var(--text-primary)}
+.rcard .body>p{font:400 var(--fs-xs)/1.35 var(--font-sans);color:var(--text-muted);margin-top:14px}
+
+.flow .r{padding:14px 0;border-top:1px solid var(--border-hairline)}
+.flow .rh{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;
+  font:400 var(--fs-sm)/1.5 var(--font-sans)}
+.flow .rh span:first-child{color:var(--text-secondary)}
+.flow .track{height:14px;background:var(--mg-ink-100);margin-top:8px}
+.flow .bar{height:14px}
+
+.save .r{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding:13px 0;border-top:1px solid var(--border-hairline);font:400 var(--fs-sm)/1.5 var(--font-sans)}
+.save .r span:last-child{font-weight:600}
+
+.led{margin-top:18px}
+.led .hd,.led .r,.led .tot{display:grid;grid-template-columns:minmax(0,1fr) 120px 110px;gap:12px}
+.led .hd{padding-bottom:10px;border-bottom:1px solid var(--mg-ink)}
+.led .hd span+span{text-align:right}
+.led .grp{font:500 var(--fs-2xs)/1.2 var(--font-sans);letter-spacing:var(--ls-label);text-transform:uppercase;
+  background:var(--mg-ink-50);padding:10px 0;margin-top:2px;text-indent:2px}
+.led .r{padding:9px 0;border-bottom:1px solid var(--border-hairline);font:400 var(--fs-sm)/1.5 var(--font-sans)}
+.led .r span:nth-child(2),.led .tot span:nth-child(2){text-align:right}
+.led .r span:nth-child(3),.led .tot span:nth-child(3){text-align:right;color:var(--text-secondary)}
+.led .tot{padding:12px 0;border-top:2px solid var(--mg-ink);border-bottom:1px solid var(--mg-ink);
+  font:600 var(--fs-sm)/1.5 var(--font-sans)}
+.led .tot span:nth-child(3){color:var(--text-primary)}
+
+.assume{margin-top:44px;background:var(--mg-ink);color:var(--mg-white);padding:34px 32px 38px}
+.assume h2{color:var(--mg-white);margin-top:14px}
+.assume ol{list-style:none;margin:22px 0 0;padding:0}
+.assume li{display:flex;gap:16px;align-items:baseline;padding:15px 0;border-top:1px solid rgba(255,255,255,.45);
+  font:400 var(--fs-sm)/1.5 var(--font-sans)}
+.assume li:last-child{border-bottom:1px solid rgba(255,255,255,.45)}
+.assume li i{font-style:normal;font:500 var(--fs-2xs)/1.2 var(--font-sans);letter-spacing:var(--ls-label);
+  min-width:20px;color:rgba(255,255,255,.75)}
+
+footer{max-width:1440px;margin:56px auto 0;padding:22px 32px 40px;border-top:1px solid var(--border-hairline);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+[hidden]{display:none !important}
+@media (max-width:760px){
+  .masthead,.hero,.cols,.result,.assume,footer{padding-left:20px;padding-right:20px}
+  .led .hd,.led .r,.led .tot{grid-template-columns:minmax(0,1fr) 96px}
+  .led .hd span:last-child,.led .r span:nth-child(3),.led .tot span:nth-child(3){display:none}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="masthead">
-    <div class="title">
-      <h1>Salary Calculator</h1>
-      <div class="sub">Manifest Global · India, FY 2026-27</div>
-    </div>
-  </header>
+<header class="masthead">
+  <span class="eyebrow">Salary calculator</span>
+  <div class="meta">
+    <span class="eyebrow" style="color:var(--text-secondary)">India &middot; FY 2026&ndash;27</span>
+    <span class="rule"></span>
+    <span class="eyebrow" style="color:var(--text-muted)">Runs in your browser</span>
+  </div>
+</header>
 
-  <div class="grid">
-    <!-- INPUTS -->
-    <div class="panel">
-      <h2>Your numbers</h2>
-      <div class="hint">Enter your annual Gross Salary and choices below. Nothing is saved or sent anywhere — all maths runs in your browser.</div>
+<section class="hero">
+  <div class="inner">
+    <span class="eyebrow">Salary calculator</span>
+    <h1>Know exactly what lands in your <span class="red">bank account.</span></h1>
+    <p>One number is all this needs &mdash; your annual gross salary. Everything below it is optional fine&#8209;tuning. Nothing is saved or sent anywhere.</p>
+  </div>
+</section>
 
-      <div class="field">
-        <label for="ctc">Annual Gross Salary (₹) — excluding ad hoc income like Performance Bonus, Commission, etc.</label>
-        <input type="number" id="ctc" value="1200000" min="252012" step="1000">
-        <div class="desc">Enter your fixed annual cost figure only — the one that includes Basic, HRA, LTA, Special Allowance, and Employer PF/NPS combined (i.e. your CTC). Leave out anything variable or one-off, like performance bonus or commission. Basic = 55% of this, floored at ₹21,001/month.</div>
+<div class="cols">
+
+  <div class="col-in">
+
+    <div class="sec key">
+      <div class="sec-h">
+        <div class="left"><span class="sec-num">01</span><h3>Your gross salary</h3></div>
+        <span class="sec-tag req">Required</span>
       </div>
+      <div class="field" style="margin-top:18px">
+        <label class="label" for="ctc">Annual gross salary (&#8377;)</label>
+        <input type="number" id="ctc" value="1200000" min="252012" step="1000">
+        <p class="caption">Your fixed annual figure only &mdash; Basic, HRA, LTA, Special Allowance and employer PF/NPS combined. Leave out anything variable or one&#8209;off, like performance bonus or commission.</p>
+      </div>
+      <div class="echo">
+        <div><span class="label">Per month</span><b class="num" id="ctcMonthly">&#8377;1,00,000</b></div>
+        <div><span class="label">Basic (55%, floored)</span><b class="num" id="basicAnnual">&#8377;6,60,000</b></div>
+      </div>
+    </div>
 
-      <fieldset>
-        <legend>Provident Fund</legend>
-        <div class="radio-group" id="pfGroup">
-          <label class="radio-pill active"><input type="radio" name="pf" value="capped" checked>Capped — 12% up to ₹15,000 basic</label>
-          <label class="radio-pill"><input type="radio" name="pf" value="uncapped">Uncapped — 12% of full basic</label>
-        </div>
-        <div class="desc" style="margin-top:8px;">Applies symmetrically to employee and employer PF contributions, as per current policy.</div>
-      </fieldset>
+    <div class="sec">
+      <div class="sec-h">
+        <div class="left"><span class="sec-num">02</span><h3>Provident fund</h3></div>
+        <span class="sec-tag">Optional</span>
+      </div>
+      <div id="pfGroup" style="display:grid;gap:12px;margin-top:16px">
+        <label class="opt"><input type="radio" name="pf" value="capped" checked> Capped &mdash; 12% up to &#8377;15,000 basic</label>
+        <label class="opt"><input type="radio" name="pf" value="uncapped"> Uncapped &mdash; 12% of full basic</label>
+      </div>
+      <p class="caption" style="margin-top:12px">Applies symmetrically to employee and employer contributions, as per current policy.</p>
+    </div>
 
-      <div id="structureWarningTop"></div>
-
-      <fieldset>
-        <legend>NPS — Employer Contribution (80CCD(2))</legend>
-        <div class="field" style="margin-bottom:8px;">
-          <label class="check-row" style="border:none; padding:0 0 8px;">
-            <input type="checkbox" id="npsOptIn"> Opt in to employer NPS contribution
-          </label>
-        </div>
-        <div class="row2">
-          <div class="field" style="margin-bottom:6px;">
-            <label>% of Basic</label>
-            <input type="number" id="npsPct" value="10" min="0" max="100" step="0.5">
-          </div>
-          <div class="field" style="margin-bottom:6px;">
-            <label>Amount (₹/year)</label>
-            <input type="number" id="npsAmt" value="0" min="0" max="750000" step="1000">
-          </div>
-        </div>
-        <div class="desc">The two fields stay in sync — edit either one. Contribution ceiling is 14% of Basic or ₹7,50,000/year, whichever is lower (also the combined employer PF + NPS exemption ceiling under Sec 17(2)(vii); beyond it, the excess becomes a taxable perquisite).</div>
-        <div class="desc" id="npsPctEcho" style="margin-top:6px;"></div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Pluxee — Tax-free Benefits <span class="desc" style="display:block;font-weight:400;margin-top:2px;">Funded in full first — LTA absorbs any shortfall so this only gets capped in extreme low-Gross-Salary cases. Per the Employee Benefits &amp; Tax Savings guide.</span></legend>
-        <div class="check-row">
-          <div style="flex:1;">Meal Vouchers <span class="tag both">BOTH REGIMES</span><div class="desc">Limit: ₹1,65,600/yr (₹13,800/mo)</div></div>
-          <input type="number" class="pluxee-both-amt" data-limit="165600" value="165600" min="0" max="165600" step="500" style="width:110px;">
-        </div>
-        <div class="check-row">
-          <div style="flex:1;">Gift Allowance <span class="tag both">BOTH REGIMES</span><div class="desc">Limit: ₹15,000/yr</div></div>
-          <input type="number" class="pluxee-both-amt" data-limit="15000" value="15000" min="0" max="15000" step="500" style="width:110px;">
-        </div>
-        <div class="check-row">
-          <div style="flex:1;">Telecom &amp; WiFi <span class="tag both">BOTH REGIMES</span><div class="desc">Limit: ₹36,000/yr (₹3,000/mo)</div></div>
-          <input type="number" class="pluxee-both-amt" data-limit="36000" value="36000" min="0" max="36000" step="500" style="width:110px;">
-        </div>
-        <div class="check-row">
-          <div style="flex:1;">Learning &amp; Development <span class="tag old">OLD REGIME ONLY</span><div class="desc">Limit: ₹1,00,000/yr</div></div>
-          <input type="number" class="pluxee-old-amt" data-limit="100000" value="0" min="0" max="100000" step="500" style="width:110px;">
-        </div>
-        <div class="check-row">
-          <div style="flex:1;">Dress Allowance <span class="tag old">OLD REGIME ONLY</span><div class="desc">Limit: ₹50,000/yr</div></div>
-          <input type="number" class="pluxee-old-amt" data-limit="50000" value="0" min="0" max="50000" step="500" style="width:110px;">
-        </div>
-        <div class="desc" style="margin-top:8px;">Enter the <b>annual</b> amount you want to opt in for, up to each limit — you don't have to opt in at the maximum.</div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Other Benefits <span class="desc" style="display:block;font-weight:400;margin-top:2px;">Anything not on the standard Pluxee list — e.g. Fuel, Driver Salary, Books &amp; Periodicals. Also funded first, before LTA. Enter the <b>annual</b> amount you want to opt in for.</span></legend>
-        <div class="check-row custom-benefit-row">
-          <input type="text" class="custom-name" placeholder="Name, e.g. Fuel" style="flex:1; margin-right:8px;">
-          <select class="custom-regime" style="width:120px; margin-right:8px; font-size:12px;">
-            <option value="both">Both regimes</option>
-            <option value="old">Old regime only</option>
-          </select>
-          <input type="number" class="custom-amt" value="0" min="0" step="500" style="width:100px;" placeholder="Annual ₹">
-        </div>
-        <div class="check-row custom-benefit-row">
-          <input type="text" class="custom-name" placeholder="Name, e.g. Driver Salary" style="flex:1; margin-right:8px;">
-          <select class="custom-regime" style="width:120px; margin-right:8px; font-size:12px;">
-            <option value="both">Both regimes</option>
-            <option value="old">Old regime only</option>
-          </select>
-          <input type="number" class="custom-amt" value="0" min="0" step="500" style="width:100px;" placeholder="Annual ₹">
-        </div>
-        <div class="check-row custom-benefit-row">
-          <input type="text" class="custom-name" placeholder="Name, e.g. Books &amp; Periodicals" style="flex:1; margin-right:8px;">
-          <select class="custom-regime" style="width:120px; margin-right:8px; font-size:12px;">
-            <option value="both">Both regimes</option>
-            <option value="old">Old regime only</option>
-          </select>
-          <input type="number" class="custom-amt" value="0" min="0" step="500" style="width:100px;" placeholder="Annual ₹">
-        </div>
-        <div class="check-row custom-benefit-row">
-          <input type="text" class="custom-name" placeholder="Name, e.g. Uniform" style="flex:1; margin-right:8px;">
-          <select class="custom-regime" style="width:120px; margin-right:8px; font-size:12px;">
-            <option value="both">Both regimes</option>
-            <option value="old">Old regime only</option>
-          </select>
-          <input type="number" class="custom-amt" value="0" min="0" step="500" style="width:100px;" placeholder="Annual ₹">
-        </div>
-      </fieldset>
-
-      <details class="advanced">
-        <summary>Old-regime deductions (HRA, 80C, 80D, home loan) ▾</summary>
+    <div class="sec">
+      <div class="sec-h">
+        <div class="left"><span class="sec-num">03</span><h3>Employer NPS</h3></div>
+        <span class="sec-tag">Optional</span>
+      </div>
+      <label class="opt" style="margin-top:16px"><input type="checkbox" id="npsOptIn"> Opt in to employer NPS contribution</label>
+      <div class="row" style="margin-top:16px">
         <div class="field">
-          <label>Age category</label>
+          <label class="label" for="npsPct">% of basic</label>
+          <input type="number" id="npsPct" value="10" min="0" max="100" step="0.5">
+        </div>
+        <div class="field">
+          <label class="label" for="npsAmt">Amount &#8377;/year</label>
+          <input type="number" id="npsAmt" value="0" min="0" max="750000" step="1000">
+        </div>
+      </div>
+      <p class="caption" style="margin-top:12px">The two fields stay in sync &mdash; edit either one. Ceiling is 14% of Basic or &#8377;7,50,000 a year, whichever is lower; it is also the combined employer PF&nbsp;+&nbsp;NPS exemption ceiling under Sec&nbsp;17(2)(vii), and anything beyond it becomes a taxable perquisite.</p>
+      <p class="caption" id="npsEcho" style="color:var(--text-secondary);margin-top:8px"></p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">
+        <div class="left"><span class="sec-num">04</span><h3>Pluxee tax&#8209;free benefits</h3></div>
+        <span class="sec-tag">Optional</span>
+      </div>
+      <p class="intro">Enter the annual amount you want to opt in for, up to each limit &mdash; you don't have to take the maximum. These are funded in full first; LTA absorbs any shortfall.</p>
+      <div class="brow">
+        <div><div class="name">Meal vouchers</div><div class="caption">Limit &#8377;1,65,600 / yr &middot; both regimes</div></div>
+        <input type="number" class="pluxee-both-amt" data-limit="165600" value="165600" min="0" max="165600" step="500">
+      </div>
+      <div class="brow">
+        <div><div class="name">Gift allowance</div><div class="caption">Limit &#8377;15,000 / yr &middot; both regimes</div></div>
+        <input type="number" class="pluxee-both-amt" data-limit="15000" value="15000" min="0" max="15000" step="500">
+      </div>
+      <div class="brow">
+        <div><div class="name">Telecom &amp; WiFi</div><div class="caption">Limit &#8377;36,000 / yr &middot; both regimes</div></div>
+        <input type="number" class="pluxee-both-amt" data-limit="36000" value="36000" min="0" max="36000" step="500">
+      </div>
+      <div class="brow">
+        <div><div class="name">Learning &amp; development</div><div class="caption red">Limit &#8377;1,00,000 / yr &middot; old regime only</div></div>
+        <input type="number" class="pluxee-old-amt" data-limit="100000" value="0" min="0" max="100000" step="500">
+      </div>
+      <div class="brow">
+        <div><div class="name">Dress allowance</div><div class="caption red">Limit &#8377;50,000 / yr &middot; old regime only</div></div>
+        <input type="number" class="pluxee-old-amt" data-limit="50000" value="0" min="0" max="50000" step="500">
+      </div>
+      <div class="btns">
+        <button class="btn" type="button" id="maxPluxee">Take full limits</button>
+        <button class="btn ghost" type="button" id="clearPluxee">Clear all</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">
+        <div class="left"><span class="sec-num">05</span><h3>Other benefits</h3></div>
+        <span class="sec-tag">Optional</span>
+      </div>
+      <p class="intro">Anything off the standard Pluxee list &mdash; fuel, driver salary, books and periodicals. Also funded before LTA. Annual amounts.</p>
+      <div style="display:grid;gap:12px;margin-top:14px">
+        <div class="crow custom-benefit-row">
+          <div class="cn"><input type="text" class="custom-name" placeholder="Name, e.g. Fuel"></div>
+          <div class="cr"><select class="custom-regime"><option value="both">Both regimes</option><option value="old">Old regime only</option></select></div>
+          <div class="ca"><input type="number" class="custom-amt" value="0" min="0" step="500" placeholder="Annual &#8377;"></div>
+        </div>
+        <div class="crow custom-benefit-row">
+          <div class="cn"><input type="text" class="custom-name" placeholder="Name, e.g. Driver salary"></div>
+          <div class="cr"><select class="custom-regime"><option value="both">Both regimes</option><option value="old">Old regime only</option></select></div>
+          <div class="ca"><input type="number" class="custom-amt" value="0" min="0" step="500" placeholder="Annual &#8377;"></div>
+        </div>
+        <div class="crow custom-benefit-row">
+          <div class="cn"><input type="text" class="custom-name" placeholder="Name, e.g. Books &amp; periodicals"></div>
+          <div class="cr"><select class="custom-regime"><option value="both">Both regimes</option><option value="old">Old regime only</option></select></div>
+          <div class="ca"><input type="number" class="custom-amt" value="0" min="0" step="500" placeholder="Annual &#8377;"></div>
+        </div>
+        <div class="crow custom-benefit-row">
+          <div class="cn"><input type="text" class="custom-name" placeholder="Name, e.g. Uniform"></div>
+          <div class="cr"><select class="custom-regime"><option value="both">Both regimes</option><option value="old">Old regime only</option></select></div>
+          <div class="ca"><input type="number" class="custom-amt" value="0" min="0" step="500" placeholder="Annual &#8377;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">
+        <div class="left"><span class="sec-num">06</span><h3>Deductions</h3></div>
+        <span class="sec-tag oldonly">Old regime only</span>
+      </div>
+      <p class="intro">HRA, 80C, 80D and home&#8209;loan interest only change the Old Regime column. Skip this whole section if the New Regime is already winning by a wide margin.</p>
+      <div class="btns"><button class="btn" type="button" id="oldToggle">Add old-regime deductions</button></div>
+
+      <div id="oldFields" hidden style="display:grid;gap:18px;margin-top:22px">
+        <div class="field">
+          <label class="label" for="age">Age category</label>
           <select id="age">
             <option value="below60">Below 60</option>
-            <option value="60to79">60–79 (senior citizen)</option>
+            <option value="60to79">60&ndash;79 (senior citizen)</option>
             <option value="80plus">80+ (super senior)</option>
           </select>
         </div>
-        <div class="row2">
+        <div class="row">
           <div class="field">
-            <label>Annual rent paid (₹)</label>
+            <label class="label" for="rent">Annual rent paid (&#8377;)</label>
             <input type="number" id="rent" value="0" min="0" step="1000">
           </div>
           <div class="field">
-            <label>City type</label>
+            <label class="label" for="metro">City type</label>
             <select id="metro">
-              <option value="metro">Metro (Delhi/Mum/Kol/Chennai)</option>
+              <option value="metro">Metro &mdash; Delhi, Mumbai, Kolkata, Chennai</option>
               <option value="nonmetro">Non-metro</option>
             </select>
           </div>
         </div>
-        <div class="field">
-          <label class="check-row" style="border:none;padding:0;"><input type="checkbox" id="ltaClaim"> Claiming LTA exemption this year (have travel bills for 2 journeys in the block)</label>
-        </div>
-        <div class="row2">
+        <label class="opt"><input type="checkbox" id="ltaClaim"> Claiming LTA exemption this year &mdash; travel bills for 2 journeys in the block</label>
+        <div class="row">
           <div class="field">
-            <label>Other 80C (PPF/ELSS/insurance, ₹)</label>
+            <label class="label" for="c80">Other 80C (&#8377;)</label>
             <input type="number" id="c80" value="0" min="0" step="1000">
-            <div class="desc">Combined with employee PF, capped at ₹1,50,000.</div>
+            <span class="caption">PPF, ELSS, insurance. Combined with employee PF, capped at &#8377;1,50,000.</span>
           </div>
           <div class="field">
-            <label>80D health premium (₹)</label>
+            <label class="label" for="d80">80D health premium (&#8377;)</label>
             <input type="number" id="d80" value="0" min="0" step="1000">
+            <span class="caption">Simplified single field, not the separate self / parent sub&#8209;limits.</span>
           </div>
         </div>
-        <div class="field">
-          <label>Home loan interest paid this FY (₹)</label>
-          <input type="number" id="homeLoan" value="0" min="0" step="1000">
+        <div class="row">
+          <div class="field">
+            <label class="label" for="homeLoan">Home&#8209;loan interest this FY (&#8377;)</label>
+            <input type="number" id="homeLoan" value="0" min="0" step="1000">
+          </div>
+          <div class="field">
+            <label class="label" for="propertyType">Property type</label>
+            <select id="propertyType">
+              <option value="self">Self-occupied</option>
+              <option value="letout">Let-out (rented)</option>
+            </select>
+          </div>
         </div>
+        <p class="caption">Property type doesn't change the number, but it's worth knowing why. Self&#8209;occupied caps the interest deduction itself at &#8377;2,00,000. Let&#8209;out interest is uncapped against rental income &mdash; but under Sec&nbsp;71(3A) any resulting loss set off against salary is still capped at &#8377;2,00,000. This tool doesn't collect rental income, so both show the same cap. Either way, the New Regime doesn't allow it against salary at all.</p>
         <div class="field">
-          <label>Property type</label>
-          <select id="propertyType">
-            <option value="self">Self-occupied</option>
-            <option value="letout">Let-out (rented)</option>
-          </select>
-          <div class="desc">Doesn't change the number here, but worth knowing why: for self-occupied property, the interest deduction itself is capped at ₹2,00,000. For let-out property, the interest itself is uncapped against rental income — but under Sec 71(3A), any resulting loss that offsets salary is still capped at ₹2,00,000/year either way. Since this tool doesn't collect rental income, both cases show the same ₹2,00,000 cap against salary. Either way, New Regime doesn't allow this deduction to offset salary at all.</div>
+          <label class="label" for="otherOld">Other deductions (&#8377;/year)</label>
+          <input type="number" id="otherOld" value="0" min="0" step="1000">
+          <span class="caption">Catch&#8209;all for anything not itemised above &mdash; 80E education&#8209;loan interest, 80G donations, 80TTA savings interest.</span>
         </div>
-      </details>
-
-      <div class="field">
-        <label>Other deductions — Old Regime only (₹/year)</label>
-        <input type="number" id="otherOld" value="0" min="0" step="1000">
-        <div class="desc">Catch-all for anything not itemized above — e.g. Sec 80E (education loan interest), 80G (donations), 80TTA (savings interest). Not available under New Regime.</div>
       </div>
-
-      <button class="calc-btn" onclick="calculate()">Recalculate now</button>
-      <div class="desc" style="text-align:center;margin-top:6px;">Updates automatically as you type — this button is just a manual refresh.</div>
     </div>
 
-    <!-- RESULTS -->
-    <div id="results">
-      <div class="compare" id="compareCards"></div>
-      <div class="ledger">
-        <h2>Salary structure ledger</h2>
-        <div class="hint">How your Gross Salary breaks down before any tax is applied — the same for both regimes.</div>
-        <table class="ledger-table" id="ledgerTable"></table>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:8px">
+      <span class="caption">Every figure updates as you type.</span>
+      <button class="btn ghost" type="button" id="resetAll">Reset to defaults</button>
+    </div>
+  </div>
 
-        <div class="waterfall" id="waterfall"></div>
-      </div>
+  <div class="col-out">
 
-      <div class="footnotes">
-        <h4>What this tool assumes — read before trusting the number</h4>
-        <ul>
-          <li><b>Pluxee/Other Benefits are always funded in full first</b> (up to what you opt in); LTA takes its 10%-of-Gross-Salary target only if there's room left, otherwise it shrinks to cover the shortfall. Special Allowance only shows a number when there's genuine surplus beyond that.</li>
-          <li>Employer NPS % is a manual input, not a fixed company policy figure — confirm your actual contribution rate with your employer's payroll/HR team.</li>
-          <li>LTA exemption (Old Regime) assumes you hold valid travel bills for the claim; it is not automatically verified.</li>
-          <li>80D is shown as a single simplified field rather than the separate self/parent/senior-citizen sub-limits.</li>
-          <li>Surcharge marginal relief is now modelled at each threshold (₹50L, ₹1Cr, ₹2Cr, and ₹5Cr for Old Regime) — crossing a threshold by ₹1 won't spike your tax by lakhs.</li>
-          <li>The ₹7,50,000 ceiling on combined Employer PF + Employer NPS (+ Superannuation, if any) is a <b>combined</b> cap under Sec 17(2)(vii) — not a per-scheme limit. Verified against multiple current sources including post-Budget-2026 guidance; this hasn't changed.</li>
-          <li>Home loan interest: the ₹2,00,000 cap on offsetting salary income applies whether the property is self-occupied or let-out (Sec 71(3A)) — this tool doesn't collect rental income, so it can't model the uncapped let-out interest deduction against rental income itself, only the capped set-off against salary.</li>
-          <li>This tool projects a full FY as if your <b>current</b> Gross Salary applied for the whole period you're prorated for. If your Gross Salary changed mid-year, your actual TDS won't match this exactly — real payroll blends tax already deducted at the old rate with projected tax at the new rate, which this tool can't replicate without your revision history.</li>
-          <li>This is a planning estimate, not a substitute for your Form 16 / a tax advisor.</li>
-        </ul>
+    <div class="result">
+      <div class="top">
+        <span class="eyebrow">Monthly take&#8209;home</span>
+        <span class="eyebrow" id="heroRegime">New Regime wins</span>
       </div>
+      <div class="big"><span class="num" id="heroMonthly">&#8377;0</span><span>/ month</span></div>
+      <p class="note" id="heroNote"></p>
+      <div class="stats">
+        <div><span class="eyebrow" style="letter-spacing:var(--ls-label)">Total tax / yr</span><b class="num" id="heroTax">&#8377;0</b></div>
+        <div><span class="eyebrow" style="letter-spacing:var(--ls-label)">Tax&#8209;free benefits</span><b class="num" id="heroBenefits">&#8377;0</b></div>
+        <div><span class="eyebrow" style="letter-spacing:var(--ls-label)">Retirement corpus</span><b class="num" id="heroCorpus">&#8377;0</b></div>
+      </div>
+    </div>
+
+    <div id="warnBox"></div>
+
+    <div class="block">
+      <h2>Regime by regime</h2>
+      <div class="regimes" id="regimes"></div>
+    </div>
+
+    <div class="block">
+      <h2>Where your gross salary actually <span class="red">goes</span></h2>
+      <div class="flow" id="flow" style="margin-top:18px"></div>
+    </div>
+
+    <div class="block" id="saveBlock">
+      <h2>Tax saved by each choice</h2>
+      <p id="saveNote"></p>
+      <div class="save" id="save" style="margin-top:14px"></div>
+    </div>
+
+    <div class="block">
+      <h2>Salary structure ledger</h2>
+      <p>How your gross salary breaks down before any tax is applied &mdash; identical under both regimes.</p>
+      <div class="led">
+        <div class="hd"><span class="label">Component</span><span class="label">Annual</span><span class="label">Monthly</span></div>
+        <div id="ledger"></div>
+      </div>
+    </div>
+
+    <div class="assume">
+      <span class="eyebrow">Read before you trust the number</span>
+      <h2>What this tool <span style="color:var(--mg-coral)">assumes</span></h2>
+      <ol>
+        <li><i>01</i><span>Pluxee and Other Benefits are always funded in full first, up to what you opted in for. LTA takes its 10%&#8209;of&#8209;gross target only if there's room left, otherwise it shrinks to cover the shortfall. Special Allowance shows a number only when there's genuine surplus beyond that.</span></li>
+        <li><i>02</i><span>Employer NPS % is a manual input, not a fixed company policy figure &mdash; confirm your actual contribution rate with payroll.</span></li>
+        <li><i>03</i><span>The LTA exemption under the Old Regime assumes you hold valid travel bills for the claim. It is not automatically verified.</span></li>
+        <li><i>04</i><span>80D is a single simplified field rather than the separate self, parent and senior&#8209;citizen sub&#8209;limits.</span></li>
+        <li><i>05</i><span>Surcharge marginal relief is modelled at every threshold &mdash; &#8377;50L, &#8377;1Cr, &#8377;2Cr, and &#8377;5Cr for the Old Regime &mdash; so crossing one by &#8377;1 won't spike your tax by lakhs.</span></li>
+        <li><i>06</i><span>The &#8377;7,50,000 ceiling on employer PF + employer NPS (+ superannuation, if any) is a combined cap under Sec&nbsp;17(2)(vii), not a per&#8209;scheme limit.</span></li>
+        <li><i>07</i><span>Home&#8209;loan interest: the &#8377;2,00,000 cap on offsetting salary income applies whether the property is self&#8209;occupied or let&#8209;out (Sec&nbsp;71(3A)). This tool doesn't collect rental income, so it models only the capped set&#8209;off against salary.</span></li>
+        <li><i>08</i><span>It projects a full financial year as if your current gross salary applied throughout. If your salary changed mid&#8209;year, real payroll blends tax already deducted at the old rate with projected tax at the new one, which this can't replicate without your revision history.</span></li>
+        <li><i>09</i><span>This is a planning estimate, not a substitute for your Form&nbsp;16 or a tax adviser.</span></li>
+      </ol>
     </div>
   </div>
 </div>
 
+<footer>
+  <span class="caption">People &amp; Culture &middot; Planning estimate only</span>
+  <span class="eyebrow" style="color:var(--text-muted)">Not a substitute for Form 16</span>
+</footer>
+
 <script>
-function fmt(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
-function fmtSigned(n){ return (n<0?'-':'') + fmt(Math.abs(n)); }
+function fmt(n){ return '\u20B9' + Math.round(n).toLocaleString('en-IN'); }
+function fmtSigned(n){ return (n<0?'\u2212':'') + fmt(Math.abs(n)); }
+function q(sel){ return document.querySelector(sel); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function clampInput(el){
   const max = parseFloat(el.max); const min = parseFloat(el.min)||0;
@@ -362,71 +483,77 @@ document.querySelectorAll('.pluxee-both-amt, .pluxee-old-amt').forEach(el=>{
 });
 
 function currentBasic(){
-  const ctc = parseFloat(document.getElementById('ctc').value)||0;
+  const ctc = parseFloat(q('#ctc').value)||0;
   return Math.max(252012, 0.55*ctc);
 }
 function npsCeiling(basic){ return Math.min(0.14*basic, 750000); }
 function npsEcho(){
   const basic = currentBasic();
-  const amt = parseFloat(document.getElementById('npsAmt').value)||0;
+  const amt = parseFloat(q('#npsAmt').value)||0;
   const pct = basic>0 ? (amt/basic*100).toFixed(1) : '0';
-  document.getElementById('npsPctEcho').textContent =
-    `Contribution ceiling: 14% of Basic or ₹7,50,000/year, whichever is lower (currently ${fmt(npsCeiling(basic))}). 80CCD(2) deduction cap: 10% of Basic (Old Regime) / 14% (New Regime) — currently ≈${pct}% of Basic; any employer NPS beyond that cap stays taxable.`;
+  q('#npsEcho').textContent =
+    'Your ceiling right now is ' + fmt(npsCeiling(basic)) + '. The 80CCD(2) deduction cap is 10% of Basic under the Old Regime and 14% under the New \u2014 you are currently at about ' + pct + '% of Basic, and any employer NPS beyond the cap stays taxable.';
 }
-document.getElementById('npsPct').addEventListener('input', ()=>{
+q('#npsPct').addEventListener('input', ()=>{
   const basic = currentBasic();
   const ceiling = npsCeiling(basic);
-  let pct = parseFloat(document.getElementById('npsPct').value)||0;
+  let pct = parseFloat(q('#npsPct').value)||0;
   let amt = (pct/100)*basic;
-  if(amt>ceiling){ amt=ceiling; pct = basic>0 ? (ceiling/basic*100) : 0; document.getElementById('npsPct').value = pct.toFixed(1); }
-  document.getElementById('npsAmt').value = Math.round(amt);
+  if(amt>ceiling){ amt=ceiling; pct = basic>0 ? (ceiling/basic*100) : 0; q('#npsPct').value = pct.toFixed(1); }
+  q('#npsAmt').value = Math.round(amt);
   npsEcho();
 });
-document.getElementById('npsAmt').addEventListener('input', ()=>{
+q('#npsAmt').addEventListener('input', ()=>{
   const basic = currentBasic();
   const ceiling = npsCeiling(basic);
-  let amt = parseFloat(document.getElementById('npsAmt').value)||0;
-  if(amt>ceiling){ amt=ceiling; document.getElementById('npsAmt').value = amt; }
+  let amt = parseFloat(q('#npsAmt').value)||0;
+  if(amt>ceiling){ amt=ceiling; q('#npsAmt').value = amt; }
   const pct = basic>0 ? (amt/basic*100) : 0;
-  document.getElementById('npsPct').value = pct.toFixed(1);
+  q('#npsPct').value = pct.toFixed(1);
   npsEcho();
 });
-document.getElementById('ctc').addEventListener('input', ()=>{
-  // CTC changed: keep % fixed, recompute amount from new basic
+q('#ctc').addEventListener('input', ()=>{
   const basic = currentBasic();
   const ceiling = npsCeiling(basic);
-  let pct = parseFloat(document.getElementById('npsPct').value)||0;
+  let pct = parseFloat(q('#npsPct').value)||0;
   let amt = (pct/100)*basic;
-  if(amt>ceiling){ amt=ceiling; pct = basic>0 ? (ceiling/basic*100) : 0; document.getElementById('npsPct').value = pct.toFixed(1); }
-  document.getElementById('npsAmt').value = Math.round(amt);
+  if(amt>ceiling){ amt=ceiling; pct = basic>0 ? (ceiling/basic*100) : 0; q('#npsPct').value = pct.toFixed(1); }
+  q('#npsAmt').value = Math.round(amt);
   npsEcho();
 });
-npsEcho();
 (function initNpsAmount(){
   const basic = currentBasic();
-  const pct = parseFloat(document.getElementById('npsPct').value)||0;
+  const pct = parseFloat(q('#npsPct').value)||0;
   const amt = Math.min((pct/100)*basic, 750000);
-  document.getElementById('npsAmt').value = Math.round(amt);
+  q('#npsAmt').value = Math.round(amt);
   npsEcho();
 })();
-
-document.querySelectorAll('#pfGroup .radio-pill').forEach(p=>{
-  p.addEventListener('click', ()=>{
-    document.querySelectorAll('#pfGroup .radio-pill').forEach(x=>x.classList.remove('active'));
-    p.classList.add('active');
-    calculate();
-  });
-});
 
 let autoCalcTimer=null;
 function scheduleAutoCalc(){
   clearTimeout(autoCalcTimer);
   autoCalcTimer = setTimeout(calculate, 150);
 }
-document.querySelectorAll('.panel input, .panel select').forEach(el=>{
+document.querySelectorAll('.col-in input, .col-in select').forEach(el=>{
   const evt = (el.tagName==='SELECT' || el.type==='checkbox' || el.type==='radio') ? 'change' : 'input';
   el.addEventListener(evt, scheduleAutoCalc);
 });
+
+q('#maxPluxee').addEventListener('click', ()=>{
+  document.querySelectorAll('.pluxee-both-amt, .pluxee-old-amt').forEach(el=>{ el.value = el.dataset.limit; });
+  calculate();
+});
+q('#clearPluxee').addEventListener('click', ()=>{
+  document.querySelectorAll('.pluxee-both-amt, .pluxee-old-amt').forEach(el=>{ el.value = 0; });
+  calculate();
+});
+q('#oldToggle').addEventListener('click', ()=>{
+  const box = q('#oldFields');
+  const open = box.hasAttribute('hidden');
+  if(open){ box.removeAttribute('hidden'); } else { box.setAttribute('hidden',''); }
+  q('#oldToggle').textContent = open ? 'Hide old-regime deductions' : 'Add old-regime deductions';
+});
+q('#resetAll').addEventListener('click', ()=>{ window.location.reload(); });
 
 function slabTax(income, slabs){
   let tax=0, prev=0;
@@ -440,8 +567,7 @@ function slabTax(income, slabs){
 
 // Surcharge marginal relief: total tax+surcharge on income just above a surcharge
 // threshold can never exceed [tax+surcharge payable exactly at the threshold] +
-// [the amount of income above the threshold]. Without this, crossing a threshold
-// by ₹1 can spike total tax by lakhs — the law caps that spike at ₹1's worth.
+// [the amount of income above the threshold].
 function surchargeWithRelief(taxWithoutSurcharge, taxableIncome, slabs, thresholds){
   let currentRate=0, currentThreshold=0, prevRate=0;
   for(let i=0;i<thresholds.length;i++){
@@ -468,7 +594,7 @@ function newRegimeTax(taxable){
   let tax = slabTax(taxable, slabs);
   if(taxable<=1200000){ tax=0; }
   else { const excess = taxable-1200000; if(tax>excess) tax=excess; }
-  const thresholds=[{limit:5000000,rate:0.10},{limit:10000000,rate:0.15},{limit:20000000,rate:0.25}]; // New Regime surcharge caps at 25%, no 37% band
+  const thresholds=[{limit:5000000,rate:0.10},{limit:10000000,rate:0.15},{limit:20000000,rate:0.25}];
   const {surcharge} = surchargeWithRelief(tax, taxable, slabs, thresholds);
   const cess=(tax+surcharge)*0.04;
   return {tax, surcharge, cess, total:tax+surcharge+cess};
@@ -488,18 +614,18 @@ function oldRegimeTax(taxable, age){
 }
 
 function calculate(){
-  const ctc = parseFloat(document.getElementById('ctc').value)||0;
+  const ctc = parseFloat(q('#ctc').value)||0;
   const pfMode = document.querySelector('input[name=pf]:checked').value;
-  const npsOptIn = document.getElementById('npsOptIn').checked;
-  const npsAmtInput = parseFloat(document.getElementById('npsAmt').value)||0;
-  const age = document.getElementById('age').value;
-  const rent = parseFloat(document.getElementById('rent').value)||0;
-  const metro = document.getElementById('metro').value;
-  const ltaClaim = document.getElementById('ltaClaim').checked;
-  const other80c = parseFloat(document.getElementById('c80').value)||0;
-  const d80 = parseFloat(document.getElementById('d80').value)||0;
-  const homeLoan = parseFloat(document.getElementById('homeLoan').value)||0;
-  const otherOld = parseFloat(document.getElementById('otherOld').value)||0;
+  const npsOptIn = q('#npsOptIn').checked;
+  const npsAmtInput = parseFloat(q('#npsAmt').value)||0;
+  const age = q('#age').value;
+  const rent = parseFloat(q('#rent').value)||0;
+  const metro = q('#metro').value;
+  const ltaClaim = q('#ltaClaim').checked;
+  const other80c = parseFloat(q('#c80').value)||0;
+  const d80 = parseFloat(q('#d80').value)||0;
+  const homeLoan = parseFloat(q('#homeLoan').value)||0;
+  const otherOld = parseFloat(q('#otherOld').value)||0;
 
   const prorationFactor = 1; // always a full FY 2026-27
 
@@ -521,38 +647,33 @@ function calculate(){
   let exemptOldOnly = stdOldOnly + custOldOnly;
   const pluxeeTotal = exemptBoth + exemptOldOnly;
 
-  // --- Structure ---
-  // Basic, HRA, and Employer PF are fixed and always come first. Everything
-  // else — Employer NPS, Pluxee, your custom Other Benefits, LTA's 10% target,
-  // and any Special Allowance surplus — all compete for whatever's left of the
-  // CTC after that. NPS no longer jumps the queue ahead of Pluxee/Custom; if
-  // together they ask for more than the pool can cover, all three (NPS,
-  // Pluxee, Custom) get scaled down together and you'll see a clear flag,
-  // rather than one silently winning at the other's expense.
+  // Basic, HRA and employer PF are fixed and come first. Employer NPS, Pluxee,
+  // custom benefits, LTA's 10% target and any Special Allowance surplus all
+  // compete for what's left. If NPS + benefits ask for more than the pool can
+  // cover, both are scaled down together and a warning is raised.
   const basic = Math.max(252012, 0.55*ctc);
   const npsAmt = npsOptIn ? Math.min(npsAmtInput, 0.14*basic, 750000) : 0;
   const pfWage = pfMode==='capped' ? Math.min(basic,180000) : basic;
   const employeePF = 0.12*pfWage;
   const employerPF = 0.12*pfWage;
-  const roleLabel = 'Special Allowance';
 
   const hra = 0.5*basic;
   const ltaTarget = 0.10*ctc;
-  const pool = ctc - basic - hra - employerPF; // shared by NPS + Pluxee/Custom + LTA + Special Allowance
+  const pool = ctc - basic - hra - employerPF;
   const totalDemand = npsAmt + pluxeeTotal;
   let structureWarning = null;
 
   let npsEmployer, pluxeeCapped, lta, specialAllowance;
 
   if(pool < 0){
-    structureWarning = `At this Gross Salary, Basic + HRA + Employer PF alone exceed it — there's nothing left for NPS, Pluxee, Other Benefits, LTA, or Special Allowance. Increase Gross Salary or reduce the PF assumption.`;
+    structureWarning = 'At this gross salary, Basic + HRA + employer PF alone exceed it \u2014 there\u2019s nothing left for NPS, Pluxee, Other Benefits, LTA or Special Allowance. Increase the gross salary or reduce the PF assumption.';
     npsEmployer = 0; pluxeeCapped = 0; lta = 0; specialAllowance = 0;
   } else if(pool < totalDemand){
     const scale = totalDemand>0 ? pool/totalDemand : 1;
     npsEmployer = npsAmt*scale;
     pluxeeCapped = pluxeeTotal*scale;
     lta = 0; specialAllowance = 0;
-    structureWarning = `Your NPS (${fmt(npsAmt)}) plus Pluxee/Other Benefits (${fmt(pluxeeTotal)}) ask for ${fmt(totalDemand)} total, but only ${fmt(pool)} is left after Basic/HRA/Employer PF. Both have been scaled to about ${(scale*100).toFixed(0)}% of what you opted for, and LTA/Special Allowance are ₹0 — reduce your NPS % or Pluxee/Other Benefit amounts to close this gap.`;
+    structureWarning = 'Your NPS (' + fmt(npsAmt) + ') plus Pluxee and Other Benefits (' + fmt(pluxeeTotal) + ') ask for ' + fmt(totalDemand) + ' in total, but only ' + fmt(pool) + ' is left after Basic, HRA and employer PF. Both have been scaled to about ' + (scale*100).toFixed(0) + '% of what you opted for, and LTA and Special Allowance are \u20B90 \u2014 reduce your NPS % or your benefit amounts to close the gap.';
   } else if(pool - totalDemand >= ltaTarget){
     npsEmployer = npsAmt; pluxeeCapped = pluxeeTotal;
     lta = ltaTarget; specialAllowance = pool - totalDemand - ltaTarget;
@@ -561,10 +682,6 @@ function calculate(){
     lta = pool - totalDemand; specialAllowance = 0;
   }
 
-  // --- Apply Date-of-Joining proration to every CTC-derived figure. Since all
-  // the formulas above are linear (fixed % of Basic/CTC), scaling the final
-  // full-year amounts by daysServed/365 gives the same result as recomputing
-  // everything on a prorated Basic — just far fewer places to get it wrong.
   let basicP = basic*prorationFactor, hraP = hra*prorationFactor, ltaP = lta*prorationFactor,
       specialAllowanceP = specialAllowance*prorationFactor, employerPFP = employerPF*prorationFactor,
       employeePFP = employeePF*prorationFactor, npsEmployerP = npsEmployer*prorationFactor,
@@ -572,22 +689,18 @@ function calculate(){
 
   const cashGrossAnnual = basicP + hraP + ltaP + specialAllowanceP - pluxeeCappedP;
 
-  // combined employer contribution threshold check (7.5L) — the ₹7.5L ceiling
-  // itself isn't prorated; it's a fixed annual statutory limit either way.
   const combinedEmployerRetiral = employerPFP + npsEmployerP;
   const retiralExcessTaxable = Math.max(0, combinedEmployerRetiral - 750000);
 
   const exemptBothApplied = Math.min(pluxeeCappedP, exemptBoth*prorationFactor);
   const exemptOldOnlyApplied = Math.min(pluxeeCappedP - exemptBothApplied, exemptOldOnly*prorationFactor);
 
-  // --- New regime taxable income ---
   const grossNewBase = basicP + hraP + ltaP + specialAllowanceP + npsEmployerP + retiralExcessTaxable;
-  const grossNew = grossNewBase - exemptBothApplied; // L&D/Dress/custom-old-only stay taxable under New
+  const grossNew = grossNewBase - exemptBothApplied;
   const nps80ccd2New = Math.min(npsEmployerP, 0.14*basicP);
   const taxableNew = Math.max(0, grossNew - 75000 - nps80ccd2New);
   const taxNew = newRegimeTax(taxableNew);
 
-  // --- Old regime taxable income ---
   const hraExemption = rent>0 ? Math.max(0, Math.min(hraP, rent-0.10*basicP, (metro==='metro'?0.5:0.4)*basicP)) : 0;
   const ltaExemption = ltaClaim ? ltaP : 0;
   const grossOldBase = basicP + (hraP-hraExemption) + (ltaP-ltaExemption) + specialAllowanceP + npsEmployerP + retiralExcessTaxable;
@@ -604,9 +717,6 @@ function calculate(){
 
   const retirementCorpus = employeePFP + employerPFP + npsEmployerP;
 
-  // --- Split the already-capped exempt totals back into "standard Pluxee"
-  // vs "custom Other Benefits" shares, proportionally, purely for display and
-  // tax-saving attribution — doesn't touch the tax figures already computed above.
   const stdBothApplied = exemptBoth>0 ? exemptBothApplied * (stdBoth/exemptBoth) : 0;
   const custBothApplied = exemptBothApplied - stdBothApplied;
   const stdOldOnlyApplied = exemptOldOnly>0 ? exemptOldOnlyApplied * (stdOldOnly/exemptOldOnly) : 0;
@@ -614,9 +724,6 @@ function calculate(){
   const pluxeeStdCapped = stdBothApplied + stdOldOnlyApplied;
   const otherBenefitsCapped = custBothApplied + custOldOnlyApplied;
 
-  // --- Tax saved by each category: add back the taxable-income reduction that
-  // category currently provides (in whichever regime you'd actually pick),
-  // recompute tax at that higher taxable income, and diff from actual tax.
   const bestRegime = netNew >= netOld ? 'new' : 'old';
   const taxAtRegime = (income) => bestRegime==='new' ? newRegimeTax(Math.max(0,income)).total : oldRegimeTax(Math.max(0,income), age).total;
   const baseTaxable = bestRegime==='new' ? taxableNew : taxableOld;
@@ -624,100 +731,116 @@ function calculate(){
 
   const pluxeeStdReduction = bestRegime==='new' ? stdBothApplied : (stdBothApplied+stdOldOnlyApplied);
   const otherBenefitsReduction = bestRegime==='new' ? custBothApplied : (custBothApplied+custOldOnlyApplied);
-  const pfReduction = employerPFP; // never taxed in either regime under current law
-  const npsReduction = bestRegime==='new' ? nps80ccd2New : nps80ccd2Old; // the 80CCD(2) deduction itself
+  const pfReduction = employerPFP;
+  const npsReduction = bestRegime==='new' ? nps80ccd2New : nps80ccd2Old;
 
-  const pluxeeStdSaving = taxAtRegime(baseTaxable + pluxeeStdReduction) - baseTaxTotal;
-  const otherBenefitsSaving = taxAtRegime(baseTaxable + otherBenefitsReduction) - baseTaxTotal;
-  const pfSaving = taxAtRegime(baseTaxable + pfReduction) - baseTaxTotal;
-  const npsSaving = taxAtRegime(baseTaxable + npsReduction) - baseTaxTotal;
-
-  render({ctc,basic:basicP,hra:hraP,lta:ltaP,employeePF:employeePFP,employerPF:employerPFP,npsEmployer:npsEmployerP,specialAllowance:specialAllowanceP,pluxeeCapped:pluxeeCappedP,pluxeeStdCapped,otherBenefitsCapped,exemptBoth,exemptOldOnly:exemptOldOnlyApplied,roleLabel,prorationFactor,bestRegime,
-    pluxeeStdSaving,otherBenefitsSaving,pfSaving,npsSaving,
+  render({ctc,basic:basicP,hra:hraP,lta:ltaP,employeePF:employeePFP,employerPF:employerPFP,
+    npsEmployer:npsEmployerP,specialAllowance:specialAllowanceP,pluxeeCapped:pluxeeCappedP,
+    pluxeeStdCapped,otherBenefitsCapped,bestRegime,
+    pluxeeStdSaving: taxAtRegime(baseTaxable + pluxeeStdReduction) - baseTaxTotal,
+    otherBenefitsSaving: taxAtRegime(baseTaxable + otherBenefitsReduction) - baseTaxTotal,
+    pfSaving: taxAtRegime(baseTaxable + pfReduction) - baseTaxTotal,
+    npsSaving: taxAtRegime(baseTaxable + npsReduction) - baseTaxTotal,
     cashGrossAnnual,taxNew,taxOld,taxableNew,taxableOld,netNew,netOld,retirementCorpus,structureWarning});
 }
 
+function regimeCard(name, net, tax, isWinner, note){
+  return '<div class="rcard">' +
+    (isWinner ? '<div class="win"></div>' : '') +
+    '<div class="body">' +
+      '<div class="hd"><span class="label">' + name + '</span>' +
+        (isWinner ? '<span class="eyebrow red" style="letter-spacing:var(--ls-label)">Lower tax</span>' : '') +
+      '</div>' +
+      '<div class="mo num">' + fmt(net/12) + '</div>' +
+      '<div class="yr">per month &middot; ' + fmt(net) + ' a year</div>' +
+      '<div class="lines">' +
+        '<div class="ln"><span>Income tax</span><span class="num">' + fmt(tax.tax) + '</span></div>' +
+        '<div class="ln"><span>Surcharge</span><span class="num">' + fmt(tax.surcharge) + '</span></div>' +
+        '<div class="ln"><span>Cess (4%)</span><span class="num">' + fmt(tax.cess) + '</span></div>' +
+        '<div class="ln tot"><span>Total TDS / year</span><span class="num">' + fmt(tax.total) + '</span></div>' +
+      '</div>' +
+      '<p>' + note + '</p>' +
+    '</div></div>';
+}
+
+function ledgerGroup(title, rows){
+  return '<div class="grp">' + title + '</div>' + rows.map(([label, annual]) =>
+    '<div class="r"><span>' + label + '</span><span class="num">' + fmtSigned(annual) +
+    '</span><span class="num">' + fmtSigned(annual/12) + '</span></div>').join('');
+}
+
 function render(d){
-  const winner = d.netNew >= d.netOld ? 'new':'old';
-  const cards = document.getElementById('compareCards');
-  cards.innerHTML = `
-    ${regimeCard('New Regime', d.netNew, d.taxNew, winner==='new')}
-    ${regimeCard('Old Regime', d.netOld, d.taxOld, winner==='old')}
-  `;
+  const winner = d.netNew >= d.netOld ? 'new' : 'old';
+  const best = winner==='new' ? d.netNew : d.netOld;
+  const bestTax = winner==='new' ? d.taxNew.total : d.taxOld.total;
+  const diff = Math.abs(d.netNew - d.netOld);
 
-  const table = document.getElementById('ledgerTable');
-  table.innerHTML = `
-    <tr><th>Component</th><th class="num">Annual (₹)</th><th class="num">Monthly (₹)</th></tr>
-    <tr class="section"><td colspan="3">Fixed Pay (part of Gross Salary)</td></tr>
-    ${ledgerRow('Basic Salary (55% of Gross Salary, floored)', d.basic)}
-    ${ledgerRow('HRA (50% of Basic)', d.hra)}
-    ${ledgerRow('LTA (10% of Gross Salary)', d.lta)}
-    ${ledgerRow('Special Allowance (balancing figure)', d.specialAllowance)}
-    <tr class="section"><td colspan="3">Employer Contributions (part of Gross Salary, not paid to you directly)</td></tr>
-    ${ledgerRow('Employer PF', d.employerPF)}
-    ${ledgerRow('Employer NPS (80CCD2)', d.npsEmployer)}
-    <tr class="total"><td>Total CTC</td><td class="num">${fmt(d.ctc)}</td><td class="num">${fmt(d.ctc/12)}</td></tr>
-    <tr class="section"><td colspan="3">Pluxee / Other Benefits — funded in full first; LTA absorbed the shortfall</td></tr>
-    ${ledgerRow('Pluxee + Other Benefits opted (Meal/Gift/Telecom/L&D/Dress/custom)', -d.pluxeeCapped)}
-    <tr class="section"><td colspan="3">Deductions from cash pay</td></tr>
-    ${ledgerRow('Employee PF contribution', -d.employeePF)}
-  `;
+  q('#ctcMonthly').textContent = fmt(d.ctc/12);
+  q('#basicAnnual').textContent = fmt(d.basic);
 
-  const wf = document.getElementById('waterfall');
-  const items = [
-    ['Bank take-home (New Regime)', d.netNew, '#1B2A4A'],
-    ['Bank take-home (Old Regime)', d.netOld, '#3d4d6e'],
-    ['Pluxee tax-free wallet value', d.pluxeeStdCapped, '#2F6F62'],
-    ['Other Benefits (Car Lease/Driver/Fuel/etc.)', d.otherBenefitsCapped, '#5a8c7d'],
-    ['Retirement corpus building (PF+NPS)', d.retirementCorpus, '#C9922E'],
-  ].filter(i => i[1] > 0 || i[0].startsWith('Bank'));
-  const max = Math.max(...items.map(i=>i[1]), 1);
-  wf.innerHTML = '<h3 style="font-family:\'Inter\',sans-serif;font-size:15px;margin:0 0 10px;">Where the Gross Salary actually goes</h3>' +
-    items.map(([label,val,color])=>`
-      <div class="wf-row">
-        <div class="wf-label">${label}</div>
-        <div class="wf-bar" style="width:${Math.max(4,(val/max)*100)}%; background:${color};"></div>
-        <div class="wf-val">${fmt(val)}</div>
-      </div>
-    `).join('');
+  q('#heroRegime').textContent = winner==='new' ? 'New Regime wins' : 'Old Regime wins';
+  q('#heroMonthly').textContent = fmt(best/12);
+  q('#heroNote').textContent = fmt(best) + ' a year in your bank account \u2014 ' + (diff < 1
+    ? 'both regimes land you in the same place.'
+    : fmt(diff) + ' more than the ' + (winner==='new' ? 'Old' : 'New') + ' Regime would leave you.');
+  q('#heroTax').textContent = fmt(bestTax);
+  q('#heroBenefits').textContent = fmt(d.pluxeeStdCapped + d.otherBenefitsCapped);
+  q('#heroCorpus').textContent = fmt(d.retirementCorpus);
+
+  q('#warnBox').innerHTML = d.structureWarning ? '<div class="warn">' + d.structureWarning + '</div>' : '';
+
+  q('#regimes').innerHTML =
+    regimeCard('New Regime', d.netNew, d.taxNew, winner==='new',
+      'Standard deduction \u20B975,000. No HRA, 80C, 80D or home-loan relief \u2014 employer NPS still deductible up to 14% of Basic.') +
+    regimeCard('Old Regime', d.netOld, d.taxOld, winner==='old',
+      'Standard deduction \u20B950,000, plus HRA, LTA, 80C, 80D and home-loan interest. Employer NPS deductible up to 10% of Basic.');
+
+  const flowItems = [
+    ['Bank take-home \u2014 New Regime', d.netNew, 'var(--mg-ink)'],
+    ['Bank take-home \u2014 Old Regime', d.netOld, 'var(--mg-ink-400)'],
+    ['Pluxee tax-free wallet value', d.pluxeeStdCapped, 'var(--mg-mint)'],
+    ['Other benefits you opted in for', d.otherBenefitsCapped, 'var(--mg-periwinkle)'],
+    ['Retirement corpus building \u2014 PF + NPS', d.retirementCorpus, 'var(--mg-sun)']
+  ].filter(i => i[1] > 0 || i[0].indexOf('Bank') === 0);
+  const flowMax = Math.max.apply(null, flowItems.map(i=>i[1]).concat([1]));
+  q('#flow').innerHTML = flowItems.map(([label,val,color]) =>
+    '<div class="r"><div class="rh"><span>' + label + '</span><span class="num">' + fmt(val) + '</span></div>' +
+    '<div class="track"><div class="bar" style="width:' + Math.max(4,(val/flowMax)*100).toFixed(1) + '%;background:' + color + '"></div></div></div>'
+  ).join('');
 
   const savingsRows = [
-    ['Employer PF (excluded from taxable salary)', d.pfSaving],
-    ['Employer NPS (80CCD(2) deduction)', d.npsSaving],
-    ['Pluxee (Meal/Gift/Telecom/L&D/Dress)', d.pluxeeStdSaving],
-    ['Other Benefits (your custom entries)', d.otherBenefitsSaving],
+    ['Employer PF \u2014 excluded from taxable salary', d.pfSaving],
+    ['Employer NPS \u2014 80CCD(2) deduction', d.npsSaving],
+    ['Pluxee \u2014 meal, gift, telecom, L&amp;D, dress', d.pluxeeStdSaving],
+    ['Other benefits \u2014 your custom entries', d.otherBenefitsSaving]
   ].filter(([,v]) => v !== 0);
+  q('#saveBlock').hidden = savingsRows.length === 0;
   if(savingsRows.length){
-    wf.innerHTML += `<h3 style="font-family:'Inter',sans-serif;font-size:15px;margin:22px 0 6px;">Estimated tax saved by each, in ${d.bestRegime==='new'?'New':'Old'} Regime (your better option)</h3>
-      <div class="desc" style="margin-bottom:10px;">Computed by adding each amount back into your taxable income and re-running the slabs — not a flat marginal-rate guess.</div>` +
-      savingsRows.map(([label,val])=>`
-        <div class="mini-line pos" style="border-bottom:1px dashed var(--line); padding:6px 0;">
-          <span>${label}</span><span class="v">${fmt(val)}</span>
-        </div>
-      `).join('');
+    q('#saveNote').textContent = 'Worked out by adding each amount back into your taxable income and re-running the slabs in the ' +
+      (d.bestRegime==='new' ? 'New' : 'Old') + ' Regime \u2014 your better option \u2014 not a flat marginal-rate guess.';
+    q('#save').innerHTML = savingsRows.map(([label,val]) =>
+      '<div class="r"><span>' + label + '</span><span class="num">' + fmt(val) + '</span></div>').join('');
   }
 
-  document.getElementById('structureWarningTop').innerHTML = d.structureWarning
-    ? `<div class="notice" style="margin:-6px 0 16px;">${d.structureWarning}</div>` : '';
-}
-
-function regimeCard(title, net, tax, isWinner){
-  return `
-  <div class="regime-card ${isWinner?'winner':''}">
-    ${isWinner?'<div class="badge">LOWER TAX</div>':''}
-    <h3>${title}</h3>
-    <div class="big-figure">${fmt(net/12)} <span class="per">/ month</span></div>
-    <div class="sub-figure">${fmt(net)} / year take-home</div>
-    <div class="mini-line neg"><span>Income Tax</span><span class="v">${fmt(tax.tax)}</span></div>
-    <div class="mini-line neg"><span>Surcharge</span><span class="v">${fmt(tax.surcharge)}</span></div>
-    <div class="mini-line neg"><span>Health &amp; Education Cess (4%)</span><span class="v">${fmt(tax.cess)}</span></div>
-    <div class="mini-line" style="font-weight:600;"><span>Total Tax (TDS/year)</span><span class="v">${fmt(tax.total)}</span></div>
-  </div>`;
-}
-
-function ledgerRow(label, annual){
-  const cls = annual<0 ? ' class="num" style="color:#a8432f;"' : ' class="num"';
-  return `<tr><td>${label}</td><td${cls}>${fmtSigned(annual)}</td><td${cls}>${fmtSigned(annual/12)}</td></tr>`;
+  q('#ledger').innerHTML =
+    ledgerGroup('Fixed pay \u2014 part of your gross salary', [
+      ['Basic salary \u2014 55% of gross, floored', d.basic],
+      ['HRA \u2014 50% of Basic', d.hra],
+      ['LTA \u2014 targets 10% of gross', d.lta],
+      ['Special Allowance \u2014 balancing figure', d.specialAllowance]
+    ]) +
+    ledgerGroup('Employer contributions \u2014 in gross, not paid to you directly', [
+      ['Employer PF', d.employerPF],
+      ['Employer NPS \u2014 80CCD(2)', d.npsEmployer]
+    ]) +
+    '<div class="tot"><span>Total gross salary</span><span class="num">' + fmt(d.ctc) +
+      '</span><span class="num">' + fmt(d.ctc/12) + '</span></div>' +
+    ledgerGroup('Routed into benefits \u2014 funded first, LTA absorbs the shortfall', [
+      ['Pluxee + other benefits opted in', -d.pluxeeCapped]
+    ]) +
+    ledgerGroup('Deducted from cash pay', [
+      ['Employee PF contribution', -d.employeePF]
+    ]);
 }
 
 calculate();
