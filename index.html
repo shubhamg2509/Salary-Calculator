@@ -239,8 +239,8 @@ footer{max-width:1440px;margin:56px auto 0;padding:22px 32px 40px;border-top:1px
         <span class="sec-tag">Optional</span>
       </div>
       <div id="pfGroup" style="display:grid;gap:12px;margin-top:16px">
-        <label class="opt"><input type="radio" name="pf" value="capped" checked> Capped &mdash; 12% up to &#8377;15,000 basic</label>
-        <label class="opt"><input type="radio" name="pf" value="uncapped"> Uncapped &mdash; 12% of full basic</label>
+        <label class="opt"><input type="radio" name="pf" value="capped" checked> Capped &mdash; 12% of &#8377;25,000 wage ceiling (&#8377;3,000 / month)</label>
+        <label class="opt"><input type="radio" name="pf" value="uncapped"> Uncapped &mdash; 12% of full basic (minimum &#8377;3,000 / month)</label>
       </div>
       <p class="caption" style="margin-top:12px">Applies symmetrically to employee and employer contributions, as per current policy.</p>
     </div>
@@ -273,15 +273,15 @@ footer{max-width:1440px;margin:56px auto 0;padding:22px 32px 40px;border-top:1px
       <p class="intro">Enter the annual amount you want to opt in for, up to each limit &mdash; you don't have to take the maximum. These are funded in full first; LTA absorbs any shortfall.</p>
       <div class="brow">
         <div><div class="name">Meal vouchers</div><div class="caption">Limit &#8377;1,65,600 / yr &middot; both regimes</div></div>
-        <input type="number" class="pluxee-both-amt" data-limit="165600" value="165600" min="0" max="165600" step="500">
+        <input type="number" class="pluxee-both-amt" data-limit="165600" value="0" min="0" max="165600" step="500">
       </div>
       <div class="brow">
         <div><div class="name">Gift allowance</div><div class="caption">Limit &#8377;15,000 / yr &middot; both regimes</div></div>
-        <input type="number" class="pluxee-both-amt" data-limit="15000" value="15000" min="0" max="15000" step="500">
+        <input type="number" class="pluxee-both-amt" data-limit="15000" value="0" min="0" max="15000" step="500">
       </div>
       <div class="brow">
         <div><div class="name">Telecom &amp; WiFi</div><div class="caption">Limit &#8377;36,000 / yr &middot; both regimes</div></div>
-        <input type="number" class="pluxee-both-amt" data-limit="36000" value="36000" min="0" max="36000" step="500">
+        <input type="number" class="pluxee-both-amt" data-limit="36000" value="0" min="0" max="36000" step="500">
       </div>
       <div class="brow">
         <div><div class="name">Learning &amp; development</div><div class="caption red">Limit &#8377;1,00,000 / yr &middot; old regime only</div></div>
@@ -653,7 +653,7 @@ function calculate(){
   // cover, both are scaled down together and a warning is raised.
   const basic = Math.max(252012, 0.55*ctc);
   const npsAmt = npsOptIn ? Math.min(npsAmtInput, 0.14*basic, 750000) : 0;
-  const pfWage = pfMode==='capped' ? Math.min(basic,180000) : basic;
+  const pfWage = pfMode==='capped' ? 300000 : Math.max(basic,300000);
   const employeePF = 0.12*pfWage;
   const employerPF = 0.12*pfWage;
 
