@@ -657,15 +657,21 @@ function calculate(){
   const employeePF = 0.12*pfWage;
   const employerPF = 0.12*pfWage;
 
-  const hra = 0.5*basic;
+  // HRA targets 50% of Basic but can only use what's left after Basic + employer PF.
+  const hraTarget = 0.5*basic;
+  const hraRoom = Math.max(0, ctc - basic - employerPF);
+  const hra = Math.min(hraTarget, hraRoom);
   const ltaTarget = 0.10*ctc;
-  const pool = ctc - basic - hra - employerPF;
+  const pool = Math.max(0, ctc - basic - hra - employerPF);
   const totalDemand = npsAmt + pluxeeTotal;
   let structureWarning = null;
 
   let npsEmployer, pluxeeCapped, lta, specialAllowance;
 
-  if(pool < 0){
+  if(hra < hraTarget){
+    structureWarning = 'After Basic (' + fmt(basic) + ') and employer PF (' + fmt(employerPF) + '), only ' + fmt(hraRoom) + ' is left \u2014 so HRA is ' + fmt(hra) + ' instead of 50% of Basic (' + fmt(hraTarget) + '), and there\u2019s nothing left for NPS, Pluxee, Other Benefits, LTA or Special Allowance. Increase the gross salary or switch PF to capped.';
+    npsEmployer = 0; pluxeeCapped = 0; lta = 0; specialAllowance = 0;
+  } else if(pool <= 0 && false){
     structureWarning = 'At this gross salary, Basic + HRA + employer PF alone exceed it \u2014 there\u2019s nothing left for NPS, Pluxee, Other Benefits, LTA or Special Allowance. Increase the gross salary or reduce the PF assumption.';
     npsEmployer = 0; pluxeeCapped = 0; lta = 0; specialAllowance = 0;
   } else if(pool < totalDemand){
@@ -734,7 +740,7 @@ function calculate(){
   const pfReduction = employerPFP;
   const npsReduction = bestRegime==='new' ? nps80ccd2New : nps80ccd2Old;
 
-  render({ctc,basic:basicP,hra:hraP,lta:ltaP,employeePF:employeePFP,employerPF:employerPFP,
+  render({ctc,basic:basicP,hra:hraP,hraShort:hra<hraTarget,lta:ltaP,employeePF:employeePFP,employerPF:employerPFP,
     npsEmployer:npsEmployerP,specialAllowance:specialAllowanceP,pluxeeCapped:pluxeeCappedP,
     pluxeeStdCapped,otherBenefitsCapped,bestRegime,
     pluxeeStdSaving: taxAtRegime(baseTaxable + pluxeeStdReduction) - baseTaxTotal,
@@ -825,7 +831,7 @@ function render(d){
   q('#ledger').innerHTML =
     ledgerGroup('Fixed pay \u2014 part of your gross salary', [
       ['Basic salary \u2014 55% of gross, floored', d.basic],
-      ['HRA \u2014 50% of Basic', d.hra],
+      [d.hraShort ? 'HRA \u2014 limited to what\u2019s left after Basic and PF' : 'HRA \u2014 50% of Basic', d.hra],
       ['LTA \u2014 targets 10% of gross', d.lta],
       ['Special Allowance \u2014 balancing figure', d.specialAllowance]
     ]) +
